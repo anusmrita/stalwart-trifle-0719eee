@@ -5,7 +5,7 @@
 <title>Happy Birthday Lakshmi Akka 🌙</title>
 
 <style>
-body {
+body{
   margin:0;
   height:100vh;
   background:linear-gradient(135deg,#ffd6f0,#e8ddff);
@@ -14,11 +14,13 @@ body {
   align-items:center;
   font-family:'Comic Sans MS','Poppins',cursive;
   overflow:hidden;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text y='30' font-size='30'>✨</text></svg>"), auto;
 }
 
-/* MAIN */
-.container { text-align:center; z-index:5; }
-.button {
+.container{text-align:center;z-index:5}
+
+/* ---------- BUTTON ---------- */
+.button{
   background:#ff8fcf;
   color:white;
   padding:22px 45px;
@@ -26,120 +28,195 @@ body {
   font-size:26px;
   cursor:pointer;
   animation:pulse 2s infinite;
+  box-shadow:0 10px 30px rgba(255,143,207,.6);
 }
-@keyframes pulse { 50%{transform:scale(1.08);} }
+@keyframes pulse{50%{transform:scale(1.08);}}
 
-.photo { display:none; animation:pop 1s forwards; }
-.photo img {
+/* ---------- PHOTO ---------- */
+.photo{display:none;animation:pop 1s forwards;}
+.photo img{
   width:320px;height:320px;
   border-radius:50%;
   border:8px solid #ff8fcf;
   box-shadow:0 25px 50px rgba(255,105,180,.6);
 }
 
-/* CAKE */
-.cake{display:none;margin:20px auto;width:160px;}
-.layer{background:#ffc1e6;height:34px;border-radius:14px;margin-bottom:6px;}
-.candle{width:8px;height:28px;background:#fff;margin:auto;position:relative;}
-.flame{width:14px;height:14px;background:gold;border-radius:50%;position:absolute;top:-14px;left:-3px;animation:flicker .4s infinite alternate;}
+/* ---------- CAKE ---------- */
+.cake{display:none;margin:25px auto;width:180px;position:relative}
+.layer{
+  background:linear-gradient(#ffc1e6,#ff9fd1);
+  height:36px;border-radius:18px;margin-bottom:6px;
+}
+.candle{width:10px;height:30px;background:#fff;margin:auto;cursor:pointer}
+.flame{
+  width:16px;height:16px;background:gold;border-radius:50%;
+  position:absolute;top:-16px;left:-3px;
+  animation:flicker .4s infinite alternate;
+}
+.blown .flame{display:none}
 @keyframes flicker{to{transform:scale(1.2);}}
 
-/* TEXT */
-.wish{display:none;animation:fadeIn 2s forwards;}
-.wish h1{color:#ff3fa4;font-size:38px;}
-.wish p{color:#9b4dcc;font-size:22px;}
-.signature{font-size:24px;color:#ff69b4;margin-top:10px;}
+/* ---------- SEALED LETTER ---------- */
+.envelope{
+  display:none;
+  width:300px;
+  height:200px;
+  margin:30px auto;
+  background:#f7e7c6;
+  border:2px solid #d4b483;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 15px 30px rgba(0,0,0,.3);
+  animation:fadeIn 2s forwards;
+}
 
-/* MOON */
+/* Wax seal */
+.seal{
+  width:50px;height:50px;
+  background:radial-gradient(circle,#b3002d,#6b001a);
+  border-radius:50%;
+  position:absolute;
+  bottom:15px;left:50%;
+  transform:translateX(-50%);
+  color:#ffd6e8;
+  font-size:26px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 0 10px rgba(179,0,45,.7);
+}
+
+/* ---------- OPEN LETTER ---------- */
+.letter{
+  display:none;
+  width:340px;
+  padding:30px;
+  background:
+    repeating-linear-gradient(
+      #fff8e7,
+      #fff8e7 24px,
+      #f2e1c1 25px
+    );
+  border:2px solid #e0c79a;
+  border-radius:8px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  font-family:'Georgia','Times New Roman',serif;
+  animation:openLetter 1.5s forwards;
+}
+
+.letter h1{color:#8b3a62}
+.letter p{font-size:18px;color:#5a3a2e;line-height:1.6}
+.signature{margin-top:20px;font-style:italic;color:#b04a7a}
+
+@keyframes openLetter{
+  from{transform:scaleY(0)}
+  to{transform:scaleY(1)}
+}
+
+/* ---------- MOON & CATS ---------- */
 .moon{
   position:absolute;top:30px;right:50px;
   width:100px;height:100px;border-radius:50%;
-  background:white;
-  box-shadow:0 0 40px rgba(255,255,255,.9);
+  background:white;box-shadow:0 0 50px white;
   animation:moonGlow 4s infinite;
 }
-@keyframes moonGlow{50%{box-shadow:0 0 60px #fff;}}
+@keyframes moonGlow{50%{box-shadow:0 0 70px #fff}}
 
-/* CATS 🐱 */
-.cat-peek{position:absolute;bottom:-10px;left:20px;font-size:60px;animation:peek 3s infinite;}
-@keyframes peek{50%{transform:translateY(-30px);} }
+.cat{position:absolute;bottom:20px;font-size:50px}
+.cat.left{left:20px}
+.cat.right{right:20px}
 
-.cat-walk{position:absolute;bottom:20px;left:-80px;font-size:50px;animation:walk 12s linear infinite;}
-@keyframes walk{to{left:110vw;}}
+/* ---------- CONFETTI ---------- */
+.confetti{
+  position:fixed;
+  font-size:22px;
+  animation:fall 4s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
 
-.cat-sleep{position:absolute;bottom:15px;right:20px;font-size:50px;animation:sleep 2s infinite;}
-@keyframes sleep{50%{opacity:.5;}}
+/* ---------- EFFECTS ---------- */
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-/* EFFECTS */
-.float{position:absolute;animation:floatUp 6s linear infinite;}
-@keyframes floatUp{to{transform:translateY(-110vh);opacity:0;}}
-
-.glitter{position:fixed;pointer-events:none;animation:fade 1s forwards;}
-@keyframes fade{to{opacity:0;transform:scale(2);} }
-
-@keyframes pop{from{transform:scale(0);}to{transform:scale(1);} }
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;} }
 </style>
 </head>
 
 <body>
 
 <div class="moon"></div>
-<div class="cat-peek">🐱</div>
-<div class="cat-walk">🐈</div>
-<div class="cat-sleep">🐈‍⬛💤</div>
+<div class="cat left">🐱</div>
+<div class="cat right">🐈‍⬛</div>
 
-<audio id="music" src="happy_birthday.mp3"></audio>
+<audio id="music" src="happy_birthday.mp3" preload="auto"></audio>
 
 <div class="container">
-  <div class="button" onclick="showSurprise()">🎀 Click to see a surprise 🎀</div>
+  <div class="button" onclick="start()">🎀 Click to see a surprise 🎀</div>
 
   <div class="photo" id="photo">
-    <img src="IMG_7324.jpg" alt="Lakshmi">
+    <img src="IMG_7324.jpg">
   </div>
 
   <div class="cake" id="cake">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="layer"></div><div class="layer"></div><div class="layer"></div>
+    <div class="candle" id="candle" onclick="blow()">
+      <div class="flame"></div>
+    </div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
   </div>
 
-  <div class="wish" id="wish">
+  <!-- Sealed Envelope -->
+  <div class="envelope" id="envelope" onclick="openLetter()">
+    <div class="seal">✉️</div>
+  </div>
+
+  <!-- Letter -->
+  <div class="letter" id="letter">
     <h1>🌙 Happy Birthday Lakshmi Akka 🌙</h1>
-    <p>Like the moon, you shine softly and beautifully ✨</p>
+    <p>
+      Hey Lakshmi Akka,
+
+Just wanted to send a little note your way on your special day!
+You always make people feel calm and happy, and your smile is like a little bit of magic ✨
+
+I hope this year brings you cozy moments, lots of laughter, and all the things that make you happiest.
+Keep shining, just like the moon 🌙
+
+    </p>
+    <p>
+      May your days be soft, magical, and full of joy ✨
+    </p>
     <div class="signature">— with love, Anu 💖</div>
   </div>
 </div>
 
 <script>
-function showSurprise(){
+function start(){
   document.querySelector('.button').style.display='none';
   photo.style.display='block';
   cake.style.display='block';
   music.play();
-  setTimeout(()=>wish.style.display='block',1200);
 }
 
-// sparkles
-setInterval(()=>{
-  let e=document.createElement('div');
-  e.className='float';
-  e.innerHTML=Math.random()>.5?'✨':'💗';
-  e.style.left=Math.random()*100+'vw';
-  e.style.fontSize=20+Math.random()*25+'px';
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6000);
-},300);
+function blow(){
+  candle.classList.add('blown');
+  envelope.style.display='block';
+}
 
-// glitter cursor
-document.addEventListener('mousemove',e=>{
-  let g=document.createElement('div');
-  g.className='glitter';
-  g.innerHTML='✨';
-  g.style.left=e.pageX+'px';
-  g.style.top=e.pageY+'px';
-  document.body.appendChild(g);
-  setTimeout(()=>g.remove(),1000);
-});
+function openLetter(){
+  envelope.style.display='none';
+  letter.style.display='block';
+  for(let i=0;i<40;i++){
+    let c=document.createElement('div');
+    c.className='confetti';
+    c.innerHTML=Math.random()>.5?'🎉':'✨';
+    c.style.left=Math.random()*100+'vw';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
 </script>
 
 </body>
