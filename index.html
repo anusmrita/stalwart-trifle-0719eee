@@ -14,7 +14,6 @@
     align-items: center;
     font-family: 'Comic Sans MS', 'Poppins', cursive;
     overflow: hidden;
-    cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
   }
 
   .container {
@@ -26,16 +25,18 @@
   .button {
     background: #ff8fcf;
     color: white;
-    padding: 20px 42px;
+    padding: 22px 45px;
     border-radius: 50px;
-    font-size: 24px;
+    font-size: 26px;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(255, 143, 207, 0.6);
-    transition: transform 0.3s;
+    animation: pulse 2s infinite;
   }
 
-  .button:hover {
-    transform: scale(1.1);
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
   }
 
   .photo {
@@ -45,42 +46,43 @@
   }
 
   .photo img {
-    width: 230px;
-    height: 230px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 50%;
-    border: 7px solid #ff8fcf;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    border: 8px solid #ff8fcf;
+    box-shadow: 0 25px 50px rgba(255,105,180,0.5);
   }
 
   .cake {
     display: none;
     margin: 25px auto;
-    width: 130px;
+    width: 150px;
   }
 
   .layer {
     background: #ffc1e6;
-    height: 32px;
-    border-radius: 12px;
+    height: 34px;
+    border-radius: 14px;
     margin-bottom: 6px;
   }
 
   .candle {
     width: 8px;
-    height: 26px;
-    background: #fff;
+    height: 28px;
+    background: white;
     margin: auto;
     position: relative;
   }
 
   .flame {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     background: gold;
     border-radius: 50%;
     position: absolute;
-    top: -12px;
-    left: -2px;
+    top: -14px;
+    left: -3px;
     animation: flicker 0.4s infinite alternate;
   }
 
@@ -92,48 +94,61 @@
 
   .wish h1 {
     color: #ff3fa4;
-    font-size: 36px;
+    font-size: 38px;
   }
 
   .wish p {
     color: #9b4dcc;
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 10px;
   }
 
   .signature {
     margin-top: 15px;
-    font-size: 22px;
+    font-size: 24px;
     color: #ff69b4;
   }
 
-  /* Animated Moon */
+  /* Moon */
   .moon {
     position: absolute;
-    top: 40px;
-    right: 60px;
-    width: 90px;
-    height: 90px;
-    background: #fff;
+    top: 30px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    background: white;
     border-radius: 50%;
-    box-shadow: 0 0 25px rgba(255,255,255,0.8);
+    box-shadow: 0 0 40px rgba(255,255,255,0.9);
     animation: moonGlow 4s ease-in-out infinite;
   }
 
   @keyframes moonGlow {
     0% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
-    50% { box-shadow: 0 0 40px rgba(255,255,255,1); }
+    50% { box-shadow: 0 0 50px rgba(255,255,255,1); }
     100% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
   }
 
-  .heart {
+  /* Floating sparkles */
+  .float {
     position: absolute;
-    animation: float 6s linear infinite;
+    animation: floatUp 6s linear infinite;
   }
 
-  @keyframes float {
+  @keyframes floatUp {
     0% { transform: translateY(100vh); opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
+  }
+
+  /* Glitter trail */
+  .glitter {
+    position: fixed;
+    pointer-events: none;
+    animation: glitterFade 1s forwards;
+  }
+
+  @keyframes glitterFade {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(2); }
   }
 
   @keyframes pop {
@@ -157,7 +172,7 @@
 
 <div class="moon"></div>
 
-<audio id="music" src="birthday.mp3"></audio>
+<audio id="music" src="happy_birthday.mp3"></audio>
 
 <div class="container">
   <div class="button" onclick="showSurprise()">
@@ -165,7 +180,7 @@
   </div>
 
   <div class="photo" id="photo">
-    <img src="lakshmi.jpg" alt="Lakshmi Akka">
+    <img src="img_7324.jpg" alt="Lakshmi Akka">
   </div>
 
   <div class="cake" id="cake">
@@ -179,8 +194,8 @@
     <h1>🌙 Happy Birthday Lakshmi Akka 🌙</h1>
     <p>
       Just like the moon, you glow softly and beautifully ✨  
-      May your life always be filled with love,  
-      calm nights, and magical dreams 💕🎂
+      May your life be filled with calm nights,  
+      love, happiness, and magic 💕🎂
     </p>
     <div class="signature">— with love, Anu 💖</div>
   </div>
@@ -198,15 +213,27 @@ function showSurprise() {
   }, 1200);
 }
 
+// Floating hearts & sparkles
 setInterval(() => {
-  const heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.innerHTML = Math.random() > 0.5 ? '💗' : '✨';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.fontSize = (15 + Math.random() * 25) + 'px';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}, 350);
+  const el = document.createElement('div');
+  el.className = 'float';
+  el.innerHTML = Math.random() > 0.5 ? '✨' : '💗';
+  el.style.left = Math.random() * 100 + 'vw';
+  el.style.fontSize = (18 + Math.random() * 25) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 6000);
+}, 300);
+
+// Glitter cursor trail
+document.addEventListener('mousemove', e => {
+  const g = document.createElement('div');
+  g.className = 'glitter';
+  g.innerHTML = '✨';
+  g.style.left = e.pageX + 'px';
+  g.style.top = e.pageY + 'px';
+  document.body.appendChild(g);
+  setTimeout(() => g.remove(), 1000);
+});
 </script>
 
 </body>
