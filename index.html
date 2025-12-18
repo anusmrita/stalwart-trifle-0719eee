@@ -47,14 +47,6 @@ body{
   background:linear-gradient(#ffc1e6,#ff9fd1);
   height:36px;border-radius:18px;margin-bottom:6px;
 }
-.candle{width:10px;height:30px;background:#fff;margin:auto;cursor:pointer;position:relative;}
-.flame{
-  width:16px;height:16px;background:gold;border-radius:50%;
-  position:absolute;top:-16px;left:-3px;
-  animation:flicker .4s infinite alternate;
-}
-.blown .flame{display:none;}
-@keyframes flicker{to{transform:scale(1.2);}}
 
 /* ---------- SEALED ENVELOPE ---------- */
 .envelope{
@@ -143,16 +135,13 @@ body{
 <audio id="music" src="happy_birthday.mp3" preload="auto"></audio>
 
 <div class="container">
-  <div class="button" onclick="start()">🎀 Click to see a surprise 🎀</div>
+  <div class="button" onclick="showSurprise()">🎀 Click here to see your letter 🎀</div>
 
   <div class="photo" id="photo">
     <img src="IMG_7324.jpg" alt="Lakshmi Akka">
   </div>
 
   <div class="cake" id="cake">
-    <div class="candle" id="candle" onclick="blow()">
-      <div class="flame"></div>
-    </div>
     <div class="layer"></div>
     <div class="layer"></div>
     <div class="layer"></div>
@@ -167,61 +156,41 @@ body{
   <div class="letter" id="letter">
     <h1>🌙 Happy Birthday Lakshmi Akka 🌙</h1>
     <p>
-      Hey Lakshmi Akka,
-
-Just wanted to send a little note your way on your special day!
-You always make people feel calm and happy, and your smile is like a little bit of magic ✨
+      Hey Lakshmi Akka,<br>
+      Just wanted to send a little note your way on your special day!<br>
+      You always make people feel calm and happy, and your smile is like a little bit of magic ✨
     </p>
     <p>
-      I hope this year brings you cozy moments, lots of laughter, and all the things that make you happiest.
-Keep shining, just like the moon 🌙
-    </p>
+      I hope this year brings you cozy moments, lots of laughter, and all the things that make you happiest.<br>
+      Keep shining, just like the moon 🌙
     <div class="signature">— with love, Anu 💖</div>
   </div>
 </div>
 
 <script>
-function start(){
+function showSurprise(){
   document.querySelector('.button').style.display='none';
   document.getElementById('photo').style.display='block';
   document.getElementById('cake').style.display='block';
+  document.getElementById('envelope').style.display='block';
   document.getElementById('music').play();
 }
 
-// Candle click: blow flame and show envelope
-function blow(){
-  document.getElementById('candle').classList.add('blown');
-  setTimeout(() => {
-    document.getElementById('envelope').style.display = 'block';
-  }, 500);
-}
-
-// Envelope click: open letter + confetti
 function openLetter(){
   document.getElementById('envelope').style.display='none';
   const letter = document.getElementById('letter');
   letter.style.display='block';
 
+  // Confetti
   for(let i=0;i<40;i++){
     const c=document.createElement('div');
     c.className='confetti';
-    c.innerHTML=Math.random()>.5?'🎉':'✨';
-    c.style.left=Math.random()*100+'vw';
+    c.innerHTML = Math.random()>.5 ? '🎉':'✨';
+    c.style.left = Math.random()*100+'vw';
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),4000);
   }
 }
-
-// Floating sparkles
-setInterval(()=>{
-  const e=document.createElement('div');
-  e.className='confetti';
-  e.innerHTML=Math.random()>.5?'✨':'💗';
-  e.style.left=Math.random()*100+'vw';
-  e.style.fontSize=18+Math.random()*20+'px';
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),4000);
-},500);
 
 // Glitter cursor trail
 document.addEventListener('mousemove', e=>{
