@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Lakshmi Akka 🌙</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffd6f0, #e8ddff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', 'Poppins', cursive;
+    overflow: hidden;
+    cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
+  }
+
+  .container {
+    text-align: center;
+    padding: 30px;
+    z-index: 2;
+  }
+
+  .button {
+    background: #ff8fcf;
+    color: white;
+    padding: 20px 42px;
+    border-radius: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 143, 207, 0.6);
+    transition: transform 0.3s;
+  }
+
+  .button:hover {
+    transform: scale(1.1);
+  }
+
+  .photo {
+    display: none;
+    margin-top: 20px;
+    animation: pop 1s ease forwards;
+  }
+
+  .photo img {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    border: 7px solid #ff8fcf;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  }
+
+  .cake {
+    display: none;
+    margin: 25px auto;
+    width: 130px;
+  }
+
+  .layer {
+    background: #ffc1e6;
+    height: 32px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+  }
+
+  .candle {
+    width: 8px;
+    height: 26px;
+    background: #fff;
+    margin: auto;
+    position: relative;
+  }
+
+  .flame {
+    width: 12px;
+    height: 12px;
+    background: gold;
+    border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    left: -2px;
+    animation: flicker 0.4s infinite alternate;
+  }
+
+  .wish {
+    display: none;
+    margin-top: 20px;
+    animation: fadeIn 2s ease forwards;
+  }
+
+  .wish h1 {
+    color: #ff3fa4;
+    font-size: 36px;
+  }
+
+  .wish p {
+    color: #9b4dcc;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  .signature {
+    margin-top: 15px;
+    font-size: 22px;
+    color: #ff69b4;
+  }
+
+  /* Animated Moon */
+  .moon {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    width: 90px;
+    height: 90px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(255,255,255,0.8);
+    animation: moonGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes moonGlow {
+    0% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+    50% { box-shadow: 0 0 40px rgba(255,255,255,1); }
+    100% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+  }
+
+  .heart {
+    position: absolute;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+  }
+
+  @keyframes pop {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes flicker {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+
+<audio id="music" src="birthday.mp3"></audio>
+
+<div class="container">
+  <div class="button" onclick="showSurprise()">
+    🎀 Click to see a surprise 🎀
+  </div>
+
+  <div class="photo" id="photo">
+    <img src="lakshmi.jpg" alt="Lakshmi Akka">
+  </div>
+
+  <div class="cake" id="cake">
+    <div class="candle"><div class="flame"></div></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+  </div>
+
+  <div class="wish" id="wish">
+    <h1>🌙 Happy Birthday Lakshmi Akka 🌙</h1>
+    <p>
+      Just like the moon, you glow softly and beautifully ✨  
+      May your life always be filled with love,  
+      calm nights, and magical dreams 💕🎂
+    </p>
+    <div class="signature">— with love, Anu 💖</div>
+  </div>
+</div>
+
+<script>
+function showSurprise() {
+  document.querySelector('.button').style.display = 'none';
+  document.getElementById('photo').style.display = 'block';
+  document.getElementById('cake').style.display = 'block';
+  document.getElementById('music').play();
+
+  setTimeout(() => {
+    document.getElementById('wish').style.display = 'block';
+  }, 1200);
+}
+
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = Math.random() > 0.5 ? '💗' : '✨';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 350);
+</script>
+
+</body>
+</html>
